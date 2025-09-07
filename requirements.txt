@@ -9,6 +9,7 @@ Django==5.1.4
 django-cors-headers==4.6.0
 djangorestframework==3.15.2
 ghp-import==2.1.0
+gunicorn==23.0.0
 idna==3.10
 Jinja2==3.1.4
 Markdown==3.7
@@ -36,3 +37,4 @@ six==1.17.0
 sqlparse==0.5.3
 urllib3==2.2.3
 watchdog==6.0.0
+whitenoise==6.9.0
