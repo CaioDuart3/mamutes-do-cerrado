@@ -32,7 +32,8 @@ SECRET_KEY = config('SECRET_KEY')
 # De preferência, deixe no True, para carregar os arquivos de tag static.
 DEBUG = True  
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '*').split(',')
+
 
 
 # Application definition
