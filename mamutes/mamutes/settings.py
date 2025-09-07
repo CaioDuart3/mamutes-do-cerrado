@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
+from pathlib import Path
 from pathlib import Path
 from decouple import config
 
@@ -30,8 +31,8 @@ SECRET_KEY = config('SECRET_KEY')
 # Porém, se utilizar nesse modo, rodar o servidor usando --insecure.
 # De preferência, deixe no True, para carregar os arquivos de tag static.
 DEBUG = True  
-ALLOWED_HOSTS = ['*']
-
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,[::1]").split(",")
 
 # Application definition
 
@@ -49,11 +50,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'stock',
-    
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -140,8 +141,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-import os
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOM = os.path.join(BASE_DIR, 'media')
