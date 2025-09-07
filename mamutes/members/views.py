@@ -1,6 +1,5 @@
 import base64
 import calendar
-import locale
 from datetime import date, datetime, timedelta
 from io import BytesIO
 
@@ -23,9 +22,6 @@ from .models import (
 
 from report.models import Meeting
 from .serializers import ColumnSerializer, TaskSerializer
-
-
-locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
 
 def sidebar(request):
